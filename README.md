@@ -1,11 +1,51 @@
 # advanced-xss-injector
 Advanced XSS Payload Injector: Automates XSS vulnerability testing in web apps. Features WAF evasion (URL encoding, HTML entities, Unicode, randomized payloads), customizable payloads (single/multiple file support), dynamic HTTP options (headers, cookies, GET/POST), and automated analysis of server responses to detect vulnerabilities.
 
-How to configure:
-1.You need to create a payloads file which call payloads.txt and add all XXS payloads Scripts.
+Here's the **GitHub README** section for **How to Configure** and **Usage Examples**:
 
-Usage Examples:
-Single Payload with WAF Evasion (GET):
+---
+
+## How to Configure
+
+1. **Create a Payloads File**:  
+   - Name the file `payloads.txt`.  
+   - Add all your desired XSS payload scripts, each on a new line.  
+   - Example:  
+     ```
+     <script>alert('XSS');</script>
+     <img src="x" onerror="alert('XSS')">
+     <svg onload=alert('XSS')>
+     ```
+
+2. **Install Required Dependencies**:  
+   - Ensure you have Python 3 installed.  
+   - Install necessary Python libraries using:
+  
+     pip install requests
+     ```
+
+---
+
+## Usage Examples
+
+### 1. **Single Payload with WAF Evasion (GET Method)**  
+Run the tool to test a single payload with WAF evasion:  
+
 python3 advanced_xss_injector.py -u "http://example.com/vulnerable" -p "q" -m GET --payload "<script>alert('XSS');</script>" --evade
-Multiple Payloads with Evasion (POST):
+```
+
+2. **Multiple Payloads with Evasion (POST Method) 
+Test multiple payloads from the `payloads.txt` file using POST requests with evasion techniques:
+
 python3 advanced_xss_injector.py -u "http://example.com/vulnerable" -p "q" -m POST --payload-file payloads.txt --evade
+
+---
+
+## Additional Options
+- **Custom Headers**: Add headers using `--headers`. Example:
+
+  --headers "User-Agent: CustomAgent, Authorization: BearerToken"
+
+- **Custom Cookies**: Add cookies using `--cookies`. Example:
+  --cookies "sessionid=abc123; csrftoken=xyz456"
+  ```
